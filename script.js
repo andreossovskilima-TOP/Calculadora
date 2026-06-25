@@ -11,21 +11,20 @@ function updateDisplay() {
 function appendNumber(number) {
     if (currentInput === '0' && number !== '.') {
         currentInput = number;
+    } else if (shouldResetDisplay) {
+        currentInput = number;
+        shouldResetDisplay = false;
     } else {
-        if (shouldResetDisplay) {
-            currentInput = number;
-            shouldResetDisplay = false;
-        } else {
-            // Evita colocar mais de um ponto decimal
-            if (number === '.' && currentInput.includes('.')) return;
-            currentInput += number;
-        }
+        if (number === '.' && currentInput.includes('.')) return;
+        currentInput += number;
     }
     updateDisplay();
 }
 
 function appendOperator(op) {
-    if (operator !== null) calculate();
+    if (operator !== null && !shouldResetDisplay) {
+        calculate();
+    }
     previousInput = currentInput;
     operator = op;
     shouldResetDisplay = true;
@@ -38,23 +37,14 @@ function calculate() {
     const prev = parseFloat(previousInput);
     const current = parseFloat(currentInput);
 
-    if (isNaN(prev) || ...isNaN(current)) return;
+    if (isNaN(prev) || isNaN(current)) return;
 
     switch (operator) {
-        case '+':
-            result = prev + current;
-            break;
-        case '-':
-            result = prev - current;
-            break;
-        case '*':
-            result = prev * current;
-            break;
-        case '%':
-            result = (prev * current) / 100;
-            break;
-        default:
-            return;
+        case '+': result = prev + current; break;
+        case '-': result = prev - current; break;
+        case '*': result = prev * current; break;
+        case '%': result = (prev * current) / 100; break;
+        default: return;
     }
 
     currentInput = String(result);
@@ -63,7 +53,6 @@ function calculate() {
     updateDisplay();
 }
 
-// Botão ON/C (Limpa tudo)
 function clearAll() {
     currentInput = '0';
     previousInput = '';
@@ -72,7 +61,6 @@ function clearAll() {
     updateDisplay();
 }
 
-// Botão da Setinha (Apaga o último caractere)
 function backspace() {
     if (currentInput.length > 1) {
         currentInput = currentInput.slice(0, -1);
@@ -82,14 +70,6 @@ function backspace() {
     updateDisplay();
 }
 
-// Funções de memória simuladas para os botões do topo
-function memoryAdd() {
-    shouldResetDisplay = true;
-}
-function memorySubtract() {
-    shouldResetDisplay = true;
-}
-function clearMemory() {
-    // Apenas pisca ou reseta para simular o MRC
-    clearAll();
-}
+function memoryAdd() { shouldResetDisplay = true; }
+function memorySubtract() { shouldResetDisplay = true; }
+function clearMemory() { clearAll(); }
