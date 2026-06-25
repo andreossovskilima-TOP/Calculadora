@@ -1,117 +1,152 @@
+/* ==========================================================================
+   1. VARIÁVEIS DE ESTILO (Temas e Cores)
+   ========================================================================== */
+:root {
+    /* Cores do Corpo (Prata/Cinza) */
+    --bg-main: #f0f0f0;
+    --calc-bg-start: #e6e6e6;
+    --calc-bg-end: #cccccc;
+    --calc-border: #b5b5b5;
+
+    /* Topo e Visor (Preto e Verde LCD) */
+    --top-area-bg: #1a1a1a;
+    --lcd-bg: #b8c4b7;
+    --lcd-text: #222222;
+
+    /* Botões (Azul, Preto e Vermelho) */
+    --btn-blue-start: #2b4c7e;
+    --btn-blue-end: #1a3359;
+    --btn-black-start: #404040;
+    --btn-black-end: #262626;
+    --btn-red-start: #e63929;
+    --btn-red-end: #b31c10;
+    --btn-text: #ffffff;
+}
+
+/* ==========================================================================
+   2. RESET E CONFIGURAÇÕES GERAIS
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vi;
-    height: 100vh;
-    background-color: #f0f0f0;
+    min-height: 100vh;
+    background-color: var(--bg-main);
 }
 
-/* Corpo principal da calculadora */
+/* ==========================================================================
+   3. ESTRUTURA PRINCIPAL (CORPO DA CALCULADORA)
+   ========================================================================== */
 .calculator {
     width: 320px;
-    background: linear-gradient(135deg, #e6e6e6, #cccccc);
-    border-radius: 20px 20px 30px 30px;
     padding: 20px;
-    box-shadow: 0px 10px 20px rgba(0,0,0,0.2), 
-                inset 0px 2px 5px #fff;
-    border: 2px solid #b5b5b5;
+    background: linear-gradient(135deg, var(--calc-bg-start), var(--calc-bg-end));
+    border: 2px solid var(--calc-border);
+    border-radius: 20px 20px 30px 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 
+                inset 0 2px 5px #ffffff;
 }
 
-/* Área superior preta que envolve o visor */
+/* ==========================================================================
+   4. ÁREA SUPERIOR (VISOR E MARCA)
+   ========================================================================== */
 .calc-top {
-    background-color: #1a1a1a;
+    background-color: var(--top-area-bg);
+    padding: 25px 15px 12px 15px;
+    margin-bottom: 20px;
     border-radius: 15px 15px 5px 5px;
-    padding: 25px 15px 10px 15px;
-    margin-bottom: 15px;
-    box-shadow: inset 0px 3px 5px rgba(0,0,0,0.5);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* Container do visor LCD */
+/* Moldura do visor LCD */
 .screen-container {
-    background-color: #b8c4b7;
-    border: 4px solid #333;
+    background-color: var(--lcd-bg);
+    border: 4px solid #333333;
     border-radius: 4px;
-    box-shadow: inset 0px 4px 6px rgba(0,0,0,0.3);
-    margin-bottom: 8px;
+    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
 }
 
+/* Input do visor */
 #display {
     width: 100%;
-    height: 50px;
+    height: 52px;
+    padding: 5px 12px;
     background: transparent;
     border: none;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    font-size: 2rem;
-    text-align: right;
-    padding: 5px 10px;
-    color: #222;
     outline: none;
+    color: var(--lcd-text);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-align: right;
 }
 
-/* Logotipo Letron */
+/* Logótipo Letron */
 .brand {
     color: #ffffff;
-    text-align: center;
     font-size: 1.1rem;
     font-style: italic;
     font-weight: bold;
-    letter-spacing: 1px;
+    text-align: center;
     text-transform: lowercase;
-    opacity: 0.9;
+    letter-spacing: 1.5px;
+    opacity: 0.85;
 }
 
-/* Grid de Botões */
+/* ==========================================================================
+   5. TECLADO (GRID E BOTÕES)
+   ========================================================================== */
+/* Grelha de botões - 5 colunas */
 .buttons-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 8px;
 }
 
-/* Estilo Base dos Botões */
+/* Estilo base de todos os botões */
 .btn {
-    height: 45px;
+    height: 46px;
     border: none;
     border-radius: 6px;
+    color: var(--btn-text);
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0px 3px 0px rgba(0,0,0,0.3), inset 0px 1px 2px rgba(255,255,255,0.4);
     transition: all 0.05s ease;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
+/* Efeito de clique (Botão a afundar) */
 .btn:active {
     transform: translateY(2px);
-    box-shadow: 0px 1px 0px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
 }
 
-/* Cores específicas baseadas na imagem */
+/* Paleta de Cores dos Botões */
 .btn-blue {
-    background: linear-gradient(to bottom, #2b4c7e, #1a3359);
-    color: white;
+    background: linear-gradient(to bottom, var(--btn-blue-start), var(--btn-blue-end));
 }
 
 .btn-black {
-    background: linear-gradient(to bottom, #404040, #262626);
-    color: white;
+    background: linear-gradient(to bottom, var(--btn-black-start), var(--btn-black-end));
 }
 
 .btn-red {
-    background: linear-gradient(to bottom, #e63929, #b31c10);
-    color: white;
-    font-size: 0.9rem;
+    background: linear-gradient(to bottom, var(--btn-red-start), var(--btn-red-end));
+    font-size: 0.95rem; /* Ajuste leve para o texto "ON/C" caber perfeitamente */
 }
 
-/* Botão de + que ocupa duas linhas */
+/* Modificador: Botão "+" vertical (ocupa 2 linhas) */
 .double-height {
     grid-row: span 2;
-    height: 98px;
+    height: 100px; 
 }
