@@ -2,79 +2,116 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: #1e1e1e; /* Cor de fundo idêntica ao VS Code */
+    min-height: 100vi;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
 
+/* Corpo principal da calculadora */
 .calculator {
-    background-color: #252526;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.4);
     width: 320px;
+    background: linear-gradient(135deg, #e6e6e6, #cccccc);
+    border-radius: 20px 20px 30px 30px;
+    padding: 20px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.2), 
+                inset 0px 2px 5px #fff;
+    border: 2px solid #b5b5b5;
+}
+
+/* Área superior preta que envolve o visor */
+.calc-top {
+    background-color: #1a1a1a;
+    border-radius: 15px 15px 5px 5px;
+    padding: 25px 15px 10px 15px;
+    margin-bottom: 15px;
+    box-shadow: inset 0px 3px 5px rgba(0,0,0,0.5);
+}
+
+/* Container do visor LCD */
+.screen-container {
+    background-color: #b8c4b7;
+    border: 4px solid #333;
+    border-radius: 4px;
+    box-shadow: inset 0px 4px 6px rgba(0,0,0,0.3);
+    margin-bottom: 8px;
 }
 
 #display {
     width: 100%;
-    height: 60px;
-    background-color: #3c3c3c;
+    height: 50px;
+    background: transparent;
     border: none;
-    border-radius: 8px;
-    color: #ffffff;
-    font-size: 1.8rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 2rem;
     text-align: right;
-    padding: 0 15px;
-    margin-bottom: 20px;
+    padding: 5px 10px;
+    color: #222;
     outline: none;
 }
 
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.btn {
-    height: 55px;
-    background-color: #2d2d2d;
-    border: none;
-    border-radius: 8px;
+/* Logotipo Letron */
+.brand {
     color: #ffffff;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.btn:hover {
-    background-color: #3e3e3e;
-}
-
-.btn.operator {
-    color: #007acc; /* Azul padrão VS Code */
+    text-align: center;
+    font-size: 1.1rem;
+    font-style: italic;
     font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: lowercase;
+    opacity: 0.9;
 }
 
-.btn.clear {
-    color: #f48771;
+/* Grid de Botões */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
 }
 
-.btn.equal {
-    background-color: #007acc;
+/* Estilo Base dos Botões */
+.btn {
+    height: 45px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 3px 0px rgba(0,0,0,0.3), inset 0px 1px 2px rgba(255,255,255,0.4);
+    transition: all 0.05s ease;
+}
+
+.btn:active {
+    transform: translateY(2px);
+    box-shadow: 0px 1px 0px rgba(0,0,0,0.3);
+}
+
+/* Cores específicas baseadas na imagem */
+.btn-blue {
+    background: linear-gradient(to bottom, #2b4c7e, #1a3359);
+    color: white;
+}
+
+.btn-black {
+    background: linear-gradient(to bottom, #404040, #262626);
+    color: white;
+}
+
+.btn-red {
+    background: linear-gradient(to bottom, #e63929, #b31c10);
+    color: white;
+    font-size: 0.9rem;
+}
+
+/* Botão de + que ocupa duas linhas */
+.double-height {
     grid-row: span 2;
-    height: 120px;
-}
-
-.btn.equal:hover {
-    background-color: #0062a3;
-}
-
-.btn.zero {
-    grid-column: span 2;
+    height: 98px;
 }
