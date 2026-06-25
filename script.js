@@ -1,50 +1,95 @@
 const display = document.getElementById('display');
+let currentInput = '0';
+let previousInput = '';
+let operator = null;
+let shouldResetDisplay = false;
 
-// Adiciona números ao visor
+function updateDisplay() {
+    display.value = currentInput;
+}
+
 function appendNumber(number) {
-    // Evita ter mais de um ponto decimal seguido
-    if (number === '.' && display.value.includes('.')) {
-        // Permite ponto se houver um operador antes dele
-        const lastChar = display.value.slice(-1);
-        if (!isNaN(lastChar)) {
-            const parts = display.value.split(/[\+\-\*\/]/);
-            if (parts[parts.length - 1].includes('.')) return;
-        }
-    }
-    display.value += number;
-}
-
-// Adiciona operadores ao visor
-function appendOperator(operator) {
-    if (display.value === '') return;
-    
-    const lastChar = display.value.slice(-1);
-    // Se o último caractere já for um operador, substitui pelo novo
-    if (['+', '-', '*', '/'].includes(lastChar)) {
-        display.value = display.value.slice(0, -1) + operator;
+    if (currentInput === '0' && number !== '.') {
+        currentInput = number;
     } else {
-        display.value += operator;
-    }
-}
-
-// Limpa todo o visor
-function clearDisplay() {
-    display.value = '';
-}
-
-// Apaga o último caractere (Backspace)
-function deleteLast() {
-    display.value = display.value.slice(0, -1);
-}
-
-// Executa o cálculo matemático
-function calculate() {
-    try {
-        // eval() calcula a string matemática diretamente (ex: "2+5*3")
-        if (display.value !== '') {
-            display.value = eval(display.value);
+        if (shouldResetDisplay) {
+            currentInput = number;
+            shouldResetDisplay = false;
+        } else {
+            // Evita colocar mais de um ponto decimal
+            if (number === '.' && currentInput.includes('.')) return;
+            currentInput += number;
         }
-    } catch (error) {
-        display.value = 'Erro';
     }
+    updateDisplay();
+}
+
+function appendOperator(op) {
+    if (operator !== null) calculate();
+    previousInput = currentInput;
+    operator = op;
+    shouldResetDisplay = true;
+}
+
+function calculate() {
+    if (operator === null || shouldResetDisplay) return;
+
+    let result = 0;
+    const prev = parseFloat(previousInput);
+    const current = parseFloat(currentInput);
+
+    if (isNaN(prev) || ...isNaN(current)) return;
+
+    switch (operator) {
+        case '+':
+            result = prev + current;
+            break;
+        case '-':
+            result = prev - current;
+            break;
+        case '*':
+            result = prev * current;
+            break;
+        case '%':
+            result = (prev * current) / 100;
+            break;
+        default:
+            return;
+    }
+
+    currentInput = String(result);
+    operator = null;
+    shouldResetDisplay = true;
+    updateDisplay();
+}
+
+// Botão ON/C (Limpa tudo)
+function clearAll() {
+    currentInput = '0';
+    previousInput = '';
+    operator = null;
+    shouldResetDisplay = false;
+    updateDisplay();
+}
+
+// Botão da Setinha (Apaga o último caractere)
+function backspace() {
+    if (currentInput.length > 1) {
+        currentInput = currentInput.slice(0, -1);
+    } else {
+        currentInput = '0';
+    }
+    updateDisplay();
+}
+
+// Funções de memória simuladas para os botões do topo
+function memoryAdd() {
+    shouldResetDisplay = true;
+}
+function memorySubtract() {
+    shouldResetDisplay = true;
+}
+function clearMemory() {
+    // Apenas pisca ou reseta para simular o MRC
+    clearAll();
 }
