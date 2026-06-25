@@ -3,36 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Dev</title>
+    <title>Calculadora Letron Clone</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="calculator">
-        <input type="text" id="display" readonly>
-        <div class="buttons">
-            <button class="btn clear" onclick="clearDisplay()">C</button>
-            <button class="btn operator" onclick="appendOperator('/')">/</button>
-            <button class="btn operator" onclick="appendOperator('*')">*</button>
-            <button class="btn operator" onclick="deleteLast()">⌫</button>
+        <div class="calc-top">
+            <div class="screen-container">
+                <input type="text" id="display" readonly value="0">
+            </div>
+            <div class="brand">letron</div>
+        </div>
 
-            <button class="btn" onclick="appendNumber('7')">7</button>
-            <button class="btn" onclick="appendNumber('8')">8</button>
-            <button class="btn" onclick="appendNumber('9')">9</button>
-            <button class="btn operator" onclick="appendOperator('-')">-</button>
+        <div class="buttons-grid">
+            <button class="btn btn-blue" onclick="clearMemory()">MRC</button>
+            <button class="btn btn-blue" onclick="memorySubtract()">M-</button>
+            <button class="btn btn-blue" onclick="memoryAdd()">M+</button>
+            <button class="btn btn-blue" onclick="appendOperator('%')">%</button>
+            <button class="btn btn-red" onclick="clearAll()">ON/C</button>
 
-            <button class="btn" onclick="appendNumber('4')">4</button>
-            <button class="btn" onclick="appendNumber('5')">5</button>
-            <button class="btn" onclick="appendNumber('6')">6</button>
-            <button class="btn operator" onclick="appendOperator('+')">+</button>
+            <button class="btn btn-black" onclick="appendNumber('7')">7</button>
+            <button class="btn btn-black" onclick="appendNumber('8')">8</button>
+            <button class="btn btn-black" onclick="appendNumber('9')">9</button>
+            <button class="btn btn-blue" onclick="backspace()">➔</button>
+            <button class="btn btn-blue" onclick="appendOperator('GT')">GT</button>
 
-            <button class="btn" onclick="appendNumber('1')">1</button>
-            <button class="btn" onclick="appendNumber('2')">2</button>
-            <button class="btn" onclick="appendNumber('3')">3</button>
-            <button class="btn equal" onclick="calculate()">=</button>
+            <button class="btn btn-black" onclick="appendNumber('4')">4</button>
+            <button class="btn btn-black" onclick="appendNumber('5')">5</button>
+            <button class="btn btn-black" onclick="appendNumber('6')">6</button>
+            <button class="btn btn-blue" onclick="appendOperator('-')">-</button>
+            <button class="btn btn-blue" onclick="appendOperator('+')">+</button>
 
-            <button class="btn zero" onclick="appendNumber('0')">0</button>
-            <button class="btn" onclick="appendNumber('.')">.</button>
+            <button class="btn btn-black" onclick="appendNumber('1')">1</button>
+            <button class="btn btn-black" onclick="appendNumber('2')">2</button>
+            <button class="btn btn-black" onclick="appendNumber('3')">3</button>
+            <button class="btn btn-blue double-height" onclick="appendOperator('+')">+</button>
+            <button class="btn btn-blue" onclick="appendOperator('*')">×</button>
+
+            <button class="btn btn-black" onclick="appendNumber('0')">0</button>
+            <button class="btn btn-black" onclick="appendNumber('00')">00</button>
+            <button class="btn btn-black" onclick="appendNumber('.')">.</button>
+            <button class="btn btn-blue" onclick="calculate()">=</button>
         </div>
     </div>
 
